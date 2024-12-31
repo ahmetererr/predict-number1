@@ -1,0 +1,1 @@
+venv/ backend/venv/ node_modules/ *.dylib
