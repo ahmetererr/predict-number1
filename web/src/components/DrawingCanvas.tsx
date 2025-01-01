@@ -87,8 +87,8 @@ const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
         console.log('Training mode with digit:', requestedDigit);
       }
 
-      const endpoint = mode === 'test' ? '/predict' : '/train';
-      const url = `${API_URL}${endpoint}`;
+      const endpoint = mode === 'test' ? 'predict' : 'train';
+      const url = `${API_URL}/${endpoint}`;
       console.log('Sending request to:', url);
 
       const response = await axios({
