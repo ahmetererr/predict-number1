@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     INPUT_SHAPE: tuple = (28, 28)
     
     # CORS Settings
-    BACKEND_CORS_ORIGINS: list = ["http://localhost:3000"]
+    BACKEND_CORS_ORIGINS: list = ["http://localhost:3001"]
     
     class Config:
         case_sensitive = True
