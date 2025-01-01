@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import axios from 'axios';
+import { API_URL } from '../config';
 
 interface DrawingCanvasProps {
   mode: 'train' | 'test';
@@ -87,7 +88,7 @@ const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
       }
 
       const endpoint = mode === 'test' ? '/predict' : '/train';
-      const url = `http://localhost:8001${endpoint}`;
+      const url = `${API_URL}${endpoint}`;
       console.log('Sending request to:', url);
 
       const response = await axios({
