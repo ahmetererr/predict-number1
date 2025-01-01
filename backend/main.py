@@ -18,7 +18,9 @@ origins = [
     "http://127.0.0.1:3000",
     "http://127.0.0.1:3001",
     "https://predict-number1-frontend.onrender.com",
-    "https://predict-number1.onrender.com"
+    "https://predict-number1.onrender.com",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000"
 ]
 
 app.add_middleware(
