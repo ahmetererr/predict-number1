@@ -66,15 +66,17 @@ class DigitRecognizer:
             if not hasattr(self.model, 'classes_'):
                 logger.info("First training instance, initializing model...")
                 self.model.fit(processed_image, [digit])
+                self._previous_data = (processed_image, [digit])
             else:
                 logger.info("Updating existing model...")
                 # Create a new model with updated data
-                X = processed_image
-                y = [digit]
                 if hasattr(self, '_previous_data'):
                     X = np.vstack([self._previous_data[0], processed_image])
                     y = self._previous_data[1] + [digit]
-                logger.info("Training with data shape: X=%s, y=%s", X.shape, len(y))
+                else:
+                    X = processed_image
+                    y = [digit]
+                logger.info("Training with data shape: X=%s, y=%s", X.shape, y)
                 self.model.fit(X, y)
                 self._previous_data = (X, y)
             

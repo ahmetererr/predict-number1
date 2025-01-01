@@ -20,7 +20,10 @@ origins = [
     "https://predict-number1-frontend.onrender.com",
     "https://predict-number1.onrender.com",
     "http://localhost:8000",
-    "http://127.0.0.1:8000"
+    "http://127.0.0.1:8000",
+    "https://predict-number1-frontend.vercel.app",
+    "https://predict-number1.vercel.app",
+    "https://predict-number1-cs60.onrender.com"
 ]
 
 app.add_middleware(
