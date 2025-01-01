@@ -88,7 +88,7 @@ const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
       }
 
       const endpoint = mode === 'test' ? 'predict' : 'train';
-      const url = `${API_URL}/${endpoint}`;
+      const url = new URL(endpoint, API_URL).toString();
       console.log('Sending request to:', url);
 
       const response = await axios({
