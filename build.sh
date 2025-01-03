@@ -36,15 +36,41 @@ cd ..
 echo "Setting up backend..."
 cd backend
 
+# Debug: Print Python version
+python --version
+which python
+
+# Debug: Print current directory and list files
+pwd
+ls -la
+
 # Create static directory if it doesn't exist
+echo "Creating static directory..."
+rm -rf static
 mkdir -p static
 
 # Copy frontend build files to backend/static
 echo "Copying frontend build files to backend/static..."
 cp -r ../web/build/* static/
 
+# Verify static files were copied correctly
+echo "Verifying static files..."
+if [ ! -f "static/index.html" ]; then
+    echo "Error: index.html not found in static directory!"
+    exit 1
+fi
+
+if [ ! -d "static/static" ]; then
+    echo "Error: static/static directory not found!"
+    mkdir -p static/static
+    cp -r ../web/build/static/* static/static/
+fi
+
 echo "Installing Python packages..."
 pip install -r requirements.txt
+
+# Debug: Verify installed packages
+pip list
 
 # Verify critical files
 if [ ! -f "app/__init__.py" ]; then
@@ -56,5 +82,9 @@ if [ ! -f "wsgi.py" ]; then
     echo "Error: wsgi.py not found!"
     exit 1
 fi
+
+# Debug: Check static directory contents
+echo "Checking static directory contents:"
+ls -la static/
 
 echo "Build process completed successfully" 
