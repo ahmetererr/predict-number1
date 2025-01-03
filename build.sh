@@ -36,6 +36,13 @@ cd ..
 echo "Setting up backend..."
 cd backend
 
+# Create static directory if it doesn't exist
+mkdir -p static
+
+# Copy frontend build files to backend/static
+echo "Copying frontend build files to backend/static..."
+cp -r ../web/build/* static/
+
 echo "Installing Python packages..."
 pip install -r requirements.txt
 
