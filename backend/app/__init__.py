@@ -6,22 +6,29 @@ from flask import Flask, send_from_directory
 from flask_cors import CORS
 import os
 
+# Get the absolute path to the static directory
+STATIC_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'static'))
+
 app = Flask(__name__, 
-           static_folder='static',
+           static_folder=STATIC_DIR,
            static_url_path='/static')
 
 CORS(app)
 
-# Serve static files from the React app
-@app.route('/', defaults={'path': ''})
+# Serve React App
+@app.route('/')
+def serve_react():
+    return send_from_directory(STATIC_DIR, 'index.html')
+
+# Serve static files
 @app.route('/<path:path>')
-def serve(path):
-    if path.startswith('static/'):
-        return app.send_static_file(path.replace('static/', ''))
-    return send_from_directory('static', 'index.html')
+def serve_file(path):
+    if os.path.exists(os.path.join(STATIC_DIR, path)):
+        return send_from_directory(STATIC_DIR, path)
+    return send_from_directory(STATIC_DIR, 'index.html')
 
 # API routes
-@app.route('/predict', methods=['POST'])
+@app.route('/api/predict', methods=['POST'])
 def predict():
     # Your prediction logic here
     pass
