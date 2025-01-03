@@ -7,7 +7,7 @@ from flask_cors import CORS
 import os
 
 app = Flask(__name__, 
-           static_folder=os.path.abspath(os.path.join(os.path.dirname(__file__), '../../web/build/static')),
+           static_folder='static',
            static_url_path='/static')
 
 CORS(app)
@@ -18,8 +18,7 @@ CORS(app)
 def serve(path):
     if path.startswith('static/'):
         return app.send_static_file(path.replace('static/', ''))
-    return send_from_directory(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../web/build')), 
-                             'index.html')
+    return send_from_directory('static', 'index.html')
 
 # API routes
 @app.route('/predict', methods=['POST'])
