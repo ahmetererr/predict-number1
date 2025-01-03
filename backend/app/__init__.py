@@ -10,8 +10,7 @@ import os
 STATIC_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'static'))
 
 app = Flask(__name__, 
-           static_folder=STATIC_DIR,
-           static_url_path='/static')
+           static_folder=None)  # Disable default static serving
 
 CORS(app)
 
@@ -21,10 +20,15 @@ def serve_react():
     return send_from_directory(STATIC_DIR, 'index.html')
 
 # Serve static files
-@app.route('/<path:path>')
-def serve_file(path):
-    if os.path.exists(os.path.join(STATIC_DIR, path)):
-        return send_from_directory(STATIC_DIR, path)
+@app.route('/static/<path:filename>')
+def serve_static(filename):
+    return send_from_directory(os.path.join(STATIC_DIR, 'static'), filename)
+
+# Serve root static files
+@app.route('/<path:filename>')
+def serve_root_static(filename):
+    if os.path.exists(os.path.join(STATIC_DIR, filename)):
+        return send_from_directory(STATIC_DIR, filename)
     return send_from_directory(STATIC_DIR, 'index.html')
 
 # API routes
