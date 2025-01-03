@@ -1,5 +1,11 @@
 {
-  "devDependencies": {
-    "tailwindcss": "^3.4.17"
+  "name": "predict-number",
+  "version": "1.0.0",
+  "engines": {
+    "node": "18.17.0",
+    "npm": "9.6.7"
+  },
+  "scripts": {
+    "build": "./build.sh"
   }
 }
