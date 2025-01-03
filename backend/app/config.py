@@ -12,7 +12,11 @@ class Settings(BaseSettings):
     INPUT_SHAPE: tuple = (28, 28)
     
     # CORS Settings
-    BACKEND_CORS_ORIGINS: list = ["http://localhost:3001"]
+    BACKEND_CORS_ORIGINS: list = [
+        "http://localhost:3001",
+        "https://*.onrender.com",  # Render domains
+        "http://*.onrender.com"
+    ]
     
     class Config:
         case_sensitive = True
